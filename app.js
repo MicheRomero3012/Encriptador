@@ -1,75 +1,75 @@
 /**
  * challenge de encriptador de texto para el curso de Alura 
  * 19 de julio de 2024
- * @Autor Miche R.
+ * @Autor Romero Flores Brian Michelle.
  */
 
-//funcion donde guardamos el mensaje 
+//funcion para obtener el texto ingresado
 function obtenerMensaje() {
     let entradaTexto = document.getElementById('texto').value;
     return entradaTexto;
 }
-
-// Función donde evaluamos con expresiones regulares la entrada de letras minusculas
+//funcion que valida la entrada de caracteres en minusculas mediante expresiones regulares
 function validacionMinusculas(mensaje) {
     let regex = /^[a-z ]+$/;
     return regex.test(mensaje);
 }
-
-// Función para realizar el encriptado
+//funcion para controlar el mensaje de error en caso de no cumplir con la expresión regular
+function mensajeError(mensaje) {
+    if (!validacionMinusculas(mensaje)) {
+        document.getElementById('mensajeFinal').innerText = "Solo se permiten letras minúsculas y sin acentos, por favor ingrese otro mensaje.";
+        return true;
+    }
+    return false;
+}
+//funcion que realiza la encriptacion 
 function encriptarMensaje() {
     let mensaje = obtenerMensaje();
-    //crearemos un mensaje de error en caso de que ingresen caracteres no validos
-    if (!validacionMinusculas(mensaje)) {
-        document.getElementById('mensajeFinal').innerText = "Solo se permiten letras minúsculas y sin acentos, por favor ingrese otro mensaje para encriptar.";
+    //manejo de error
+    if (mensajeError(mensaje)) {
         return;
     }
-
-    let abecedario = 'abcdefghijklmnopqrstuvwxyz';
+    //reglas para cambio en las vocales
+    let reglas = {
+        "a": "ai",
+        "e": "enter",
+        "i": "imes",
+        "o": "ober",
+        "u": "ufat"
+    };
     let mensajeEncriptado = "";
-    let desplazamiento = 3;
 
-    for (let i = 0; i < mensaje.length; i++) {
-        let letra = mensaje[i];
-        let index = abecedario.indexOf(letra);
-        if (index === -1) {
-            mensajeEncriptado += letra;
-        } else {
-            let nuevoIndex = (index + desplazamiento) % abecedario.length;
-            mensajeEncriptado += abecedario[nuevoIndex];
-        }
+    for (let letra of mensaje) {
+        mensajeEncriptado += reglas[letra] || letra;
     }
-
     document.getElementById('mensajeFinal').innerText = mensajeEncriptado;
 }
 
-// Función para desencriptar mensaje (por ahora solo un log)
+//funcion para desencriptar
 function desencriptarMensaje() {
     let mensaje = obtenerMensaje();
-    //crearemos un mensaje de error en caso de que ingresen caracteres no validos
-    if (!validacionMinusculas(mensaje)) {
-        document.getElementById('mensajeFinal').innerText = "Solo se permiten letras minúsculas y sin acentos, por favor ingrese otro mensaje para desencriptar.";
+    //manejod e error
+    if (mensajeError(mensaje)) {
         return;
     }
+    //reglas para cambio en las vocales
+    let reglas = {
+        "ai": "a",
+        "enter": "e",
+        "imes": "i",
+        "ober": "o",
+        "ufat": "u"
+    };
+    let mensajeDesencriptado = mensaje;
 
-    let abecedario = 'abcdefghijklmnopqrstuvwxyz';
-    let mensajeDesencriptado = "";
-    let desplazamiento = 3;
-
-    for (let i = 0; i < mensaje.length; i++) {
-        let letra = mensaje[i];
-        let index = abecedario.indexOf(letra);
-        if (index === -1) {
-            mensajeDesencriptado += letra;
-        } else {
-            let nuevoIndex = (index - desplazamiento + abecedario.length) % abecedario.length;
-            mensajeDesencriptado += abecedario[nuevoIndex];
-        }
+    for (let clave in reglas) {
+        let valor = reglas[clave];
+        mensajeDesencriptado = mensajeDesencriptado.split(clave).join(valor);
     }
-
     document.getElementById('mensajeFinal').innerText = mensajeDesencriptado;
 }
 
-// Asignar eventos a los botones
+// Asignar eventos a los botones de accion 
 document.getElementById('encriptar').addEventListener('click', encriptarMensaje);
 document.getElementById('desencriptar').addEventListener('click', desencriptarMensaje);
+
