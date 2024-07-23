@@ -85,7 +85,6 @@ body {
 .mensaje__advertencia {
     font-family: var(--estilo-fuente);
     font-size: var(--tamanio-fuente-botones);
-    text-align: center;
 }
 
  /*seccion de botones*/
@@ -148,13 +147,14 @@ body {
 .seccion__con__texto {
     display: none;
 }
+
 .seccion__con__texto__estilos {
     height: 95%;
     padding: 3%;
     display: flex;
     flex-direction: column;
     align-content: space-between;
-    gap: 250px;
+    gap: 50px;
     align-items: center;
     border-radius: 1%;
     border: 3px solid var(--color-letra-resaltada);
@@ -168,7 +168,6 @@ body {
     overflow-wrap: break-word; /* Alternativa a word-wrap */
     overflow: hidden; /* Oculta el contenido desbordado */
     white-space: pre-wrap; /* Conserva los espacios en blanco y permite los saltos de línea */
-
 }
 
 .boton__copiar {
@@ -180,6 +179,10 @@ body {
     border: 3px solid var(--color-letra-resaltada);
     font-family: var(--estilo-fuente);
     font-size: var(--tamanio-fuente-botones);
+}
+
+.boton__copiar:hover {
+    background-color: var(--color-letra-resaltada);
 }
 
 /*footer---------------------------------------------------------------------------------------------------------------------------*/
@@ -203,6 +206,7 @@ body {
     align-content: space-between;
     gap: 15px;
 }
+
 .redes__sociales {
     width: 35px;
     height: 35px;
@@ -220,6 +224,10 @@ body {
         align-items: center;
     }
 
+    .mensaje__advertencia {
+        text-align: center;
+    }
+
     .seccion__salida {
         width: 100%;
     }
@@ -227,5 +235,7 @@ body {
     .footer {
         align-items: center;
     }
+
+    
 
 }
