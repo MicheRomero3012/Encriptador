@@ -1,5 +1,5 @@
 <h1 align="center"> ENCRIPTADOR DE MENSAJES </h1>
-![michi](https://github.com/user-attachments/assets/35184e77-e5da-4867-9773-154f1a625f07)
+<p>@MicheR!</p>
 
 ## 💻: PROEYCTO FINALIZADO
 
