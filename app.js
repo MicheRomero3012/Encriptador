@@ -18,8 +18,10 @@ function validacionMinusculas(mensaje) {
 function mensajeError(mensaje) {
     if (!validacionMinusculas(mensaje)) {
         document.getElementById('mensajeFinal').innerText = "Solo se permiten letras minúsculas y sin acentos, por favor ingrese otro mensaje.";
+        document.getElementById('copiar').disabled = true; // deshabilita el botón copiar
         return true;
     }
+    document.getElementById('copiar').disabled = false; // habilita el botón copiar si no hay error
     return false;
 }
 //funcion que realiza la encriptacion 
@@ -70,10 +72,10 @@ function desencriptarMensaje() {
 }
 //funcion para ocultar las secciones autoamticamente
 document.addEventListener('DOMContentLoaded', function() {
-    const seccionSinTexto = document.querySelector('.seccion__sin__texto');
-    const seccionConTexto = document.querySelector('.seccion__con__texto');
-    const botonEncriptar = document.getElementById('encriptar');
-    const botonDesencriptar = document.getElementById('desencriptar');
+    let seccionSinTexto = document.querySelector('.seccion__sin__texto');
+    let seccionConTexto = document.querySelector('.seccion__con__texto');
+    let botonEncriptar = document.getElementById('encriptar');
+    let botonDesencriptar = document.getElementById('desencriptar');
 
     botonEncriptar.addEventListener('click', function() {
         seccionSinTexto.style.display = 'none';
@@ -88,8 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //función para copiar el mensaje remplazando la etiqueta <p> por un textarea temporal.
 function copiar() {
-    var texto = document.getElementById('mensajeFinal').innerText;
-    var textarea = document.createElement('textarea');
+    let texto = document.getElementById('mensajeFinal').innerText;
+    let textarea = document.createElement('textarea');
 
     textarea.value = texto;
     document.body.appendChild(textarea);
@@ -102,7 +104,7 @@ function copiar() {
 
 //funcion para limpiar el cuadro de texto con un clic
 function limpiar() {
-    var textarea = document.getElementById('texto');
+    let textarea = document.getElementById('texto');
     textarea.value = '';
 }
 
