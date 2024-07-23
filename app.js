@@ -48,7 +48,7 @@ function encriptarMensaje() {
 //funcion para desencriptar
 function desencriptarMensaje() {
     let mensaje = obtenerMensaje();
-    //manejod e error
+    //manejo de errores
     if (mensajeError(mensaje)) {
         return;
     }
@@ -67,6 +67,43 @@ function desencriptarMensaje() {
         mensajeDesencriptado = mensajeDesencriptado.split(clave).join(valor);
     }
     document.getElementById('mensajeFinal').innerText = mensajeDesencriptado;
+}
+//funcion para ocultar las secciones autoamticamente
+document.addEventListener('DOMContentLoaded', function() {
+    const seccionSinTexto = document.querySelector('.seccion__sin__texto');
+    const seccionConTexto = document.querySelector('.seccion__con__texto');
+    const botonEncriptar = document.getElementById('encriptar');
+    const botonDesencriptar = document.getElementById('desencriptar');
+
+    botonEncriptar.addEventListener('click', function() {
+        seccionSinTexto.style.display = 'none';
+        seccionConTexto.style.display = 'block';
+    });
+
+    botonDesencriptar.addEventListener('click', function() {
+        seccionSinTexto.style.display = 'none';
+        seccionConTexto.style.display = 'block';
+    });
+});
+
+//función para copiar el mensaje remplazando la etiqueta <p> por un textarea temporal.
+function copiar() {
+    var texto = document.getElementById('mensajeFinal').innerText;
+    var textarea = document.createElement('textarea');
+
+    textarea.value = texto;
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    alert('Texto copiado al portapapeles');
+}
+
+//funcion para limpiar el cuadro de texto con un clic
+function limpiar() {
+    var textarea = document.getElementById('texto');
+    textarea.value = '';
 }
 
 // Asignar eventos a los botones de accion 
